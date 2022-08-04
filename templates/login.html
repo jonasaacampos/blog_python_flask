@@ -2,30 +2,53 @@
 
 {% block body %}
     <div class="container">
+        <h1>Entre ou crie sua conta</h1>
+        <hr/>
         <div class="row">
             <div class="col">
-                <h2>Login</h2>
-                {{ form_login.email.label }}
-                {{ form_login.email }}
-                {{ form_login.senha.label }}
-                {{ form_login.senha }}
-                {{ form_login.check_lembrar_dados.label }}
-                {{ form_login.check_lembrar_dados }}
-                {{ form_login.btn_submit_login }}
-
+                <form action="" method="post" class="border">
+                    <legend>Login</legend>
+                    <fieldset>
+                        <div class="form-group">
+                            {{ form_login.email.label (class='form-control-label') }}
+                            {{ form_login.email (class='form-control') }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_login.senha.label (class='form-control-label') }}
+                            {{ form_login.senha (class='form-control') }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_login.check_lembrar_dados.label }}
+                            {{ form_login.check_lembrar_dados (class='form-chek-input') }}
+                        </div>
+                    </fieldset>
+                    {{ form_login.btn_submit_login (class='btn btn-primary') }}
+                </form>
             </div>
             <div class="col">
-                <h2>Registre-se</h2>
-                {{ form_criar_conta.username.label }}
-                {{ form_criar_conta.username }}
-                {{ form_criar_conta.email.label }}
-                {{ form_criar_conta.email }}
-                {{ form_criar_conta.senha.label }}
-                {{ form_criar_conta.senha }}
-                {{ form_criar_conta.senha_confimacao.label }}
-                {{ form_criar_conta.senha_confimacao }}
-                {{ form_criar_conta.btn_submit }}
+                <form action="" method="post" class="border">
+                    <legend>Criar conta</legend>
+                    <fieldset>
+                        <div class="form-group">
+                            {{ form_criar_conta.username.label (class='form-control-label') }}
+                            {{ form_criar_conta.username (class='form-control') }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_criar_conta.email.label (class='form-control-label') }}
+                            {{ form_criar_conta.email (class='form-control') }}
+                        </div>
 
+                        <div class="form-group">
+                            {{ form_criar_conta.senha.label (class='form-control-label') }}
+                            {{ form_criar_conta.senha (class='form-control') }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_criar_conta.senha_confimacao.label (class='form-control-label') }}
+                            {{ form_criar_conta.senha_confimacao (class='form-control') }}
+                        </div>
+                    </fieldset>
+                    {{ form_criar_conta.btn_submit (class='btn btn-primary') }}
+                </form>
 
             </div>
 
