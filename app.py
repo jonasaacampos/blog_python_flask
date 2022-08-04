@@ -25,7 +25,7 @@ def usuarios():
     return render_template('users.html', lista_usuarios=lista_usuarios)
 
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     form_login = forms.FormLogin()
     form_criar_conta = forms.FormCriarConta()
