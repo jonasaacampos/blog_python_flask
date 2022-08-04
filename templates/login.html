@@ -5,11 +5,28 @@
         <div class="row">
             <div class="col">
                 <h2>Login</h2>
-                {{ form_login }}
+                {{ form_login.email.label }}
+                {{ form_login.email }}
+                {{ form_login.senha.label }}
+                {{ form_login.senha }}
+                {{ form_login.check_lembrar_dados.label }}
+                {{ form_login.check_lembrar_dados }}
+                {{ form_login.btn_submit_login }}
+
             </div>
             <div class="col">
                 <h2>Registre-se</h2>
-                {{ form_criar_conta }}
+                {{ form_criar_conta.username.label }}
+                {{ form_criar_conta.username }}
+                {{ form_criar_conta.email.label }}
+                {{ form_criar_conta.email }}
+                {{ form_criar_conta.senha.label }}
+                {{ form_criar_conta.senha }}
+                {{ form_criar_conta.senha_confimacao.label }}
+                {{ form_criar_conta.senha_confimacao }}
+                {{ form_criar_conta.btn_submit }}
+
+
             </div>
 
         </div>

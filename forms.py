@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Length, Email, EqualTo
 
 
@@ -17,4 +17,5 @@ class FormCriarConta(FlaskForm):
 class FormLogin(FlaskForm):
     email = StringField('e-mail:', validators=[DataRequired()])
     senha = PasswordField('senha:', validators=[DataRequired(), Length(6, 20)])
+    check_lembrar_dados = BooleanField('Lembrar dados de acesso')
     btn_submit_login = SubmitField('Login')
