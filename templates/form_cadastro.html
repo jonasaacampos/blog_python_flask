@@ -1,0 +1,24 @@
+<form action="" method="post" class="border p-4 mt-2">
+    {{ form_criar_conta.csrf_token }}
+    <legend>Criar conta</legend>
+    <fieldset>
+        <div class="form-group">
+            {{ form_criar_conta.username.label (class='form-control-label') }}
+            {{ form_criar_conta.username (class='form-control') }}
+        </div>
+        <div class="form-group">
+            {{ form_criar_conta.email.label (class='form-control-label') }}
+            {{ form_criar_conta.email (class='form-control') }}
+        </div>
+
+        <div class="form-group">
+            {{ form_criar_conta.senha.label (class='form-control-label') }}
+            {{ form_criar_conta.senha (class='form-control') }}
+        </div>
+        <div class="form-group">
+            {{ form_criar_conta.senha_confimacao.label (class='form-control-label') }}
+            {{ form_criar_conta.senha_confimacao (class='form-control') }}
+        </div>
+    </fieldset>
+    {{ form_criar_conta.btn_submit_criar_conta (class='btn btn-primary mt-2') }}
+</form>

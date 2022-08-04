@@ -6,51 +6,10 @@
         <hr/>
         <div class="row">
             <div class="col">
-                <form action="" method="post" class="border p-4 mt-2">
-                    {{ form_login.csrf_token }}
-                    <legend>Login</legend>
-                    <fieldset>
-                        <div class="form-group">
-                            {{ form_login.email.label (class='form-control-label') }}
-                            {{ form_login.email (class='form-control') }}
-                        </div>
-                        <div class="form-group">
-                            {{ form_login.senha.label (class='form-control-label') }}
-                            {{ form_login.senha (class='form-control') }}
-                        </div>
-                        <div class="form-group">
-                            {{ form_login.check_lembrar_dados.label }}
-                            {{ form_login.check_lembrar_dados (class='form-chek-input') }}
-                        </div>
-                    </fieldset>
-                    {{ form_login.btn_submit_login (class='btn btn-primary mt-2') }}
-                </form>
+                {% include 'form_login.html' %}
             </div>
             <div class="col">
-                <form action="" method="post" class="border p-4 mt-2">
-                    {{ form_criar_conta.csrf_token }}
-                    <legend>Criar conta</legend>
-                    <fieldset>
-                        <div class="form-group">
-                            {{ form_criar_conta.username.label (class='form-control-label') }}
-                            {{ form_criar_conta.username (class='form-control') }}
-                        </div>
-                        <div class="form-group">
-                            {{ form_criar_conta.email.label (class='form-control-label') }}
-                            {{ form_criar_conta.email (class='form-control') }}
-                        </div>
-
-                        <div class="form-group">
-                            {{ form_criar_conta.senha.label (class='form-control-label') }}
-                            {{ form_criar_conta.senha (class='form-control') }}
-                        </div>
-                        <div class="form-group">
-                            {{ form_criar_conta.senha_confimacao.label (class='form-control-label') }}
-                            {{ form_criar_conta.senha_confimacao (class='form-control') }}
-                        </div>
-                    </fieldset>
-                    {{ form_criar_conta.btn_submit_criar_conta (class='btn btn-primary mt-2') }}
-                </form>
+                {% include 'form_cadastro.html' %}
 
             </div>
 

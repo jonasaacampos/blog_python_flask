@@ -1,0 +1,19 @@
+<form action="" method="post" class="border p-4 mt-2">
+    {{ form_login.csrf_token }}
+    <legend>Login</legend>
+    <fieldset>
+        <div class="form-group">
+            {{ form_login.email.label (class='form-control-label') }}
+            {{ form_login.email (class='form-control') }}
+        </div>
+        <div class="form-group">
+            {{ form_login.senha.label (class='form-control-label') }}
+            {{ form_login.senha (class='form-control') }}
+        </div>
+        <div class="form-group">
+            {{ form_login.check_lembrar_dados.label }}
+            {{ form_login.check_lembrar_dados (class='form-chek-input') }}
+        </div>
+    </fieldset>
+    {{ form_login.btn_submit_login (class='btn btn-primary mt-2') }}
+</form>
