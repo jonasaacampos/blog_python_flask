@@ -1,0 +1,12 @@
+########################
+## ARQUIVOS SENSÍVELS ##
+########################
+
+# DotEnv configuration
+.env
+
+# Credentials drive / google cloud
+#credentials.json
+############################
+## FIM ARQUIVOS SENSÍVELS ##
+############################
