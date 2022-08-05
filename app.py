@@ -1,11 +1,15 @@
 from flask import Flask, render_template, url_for, request, flash, redirect
 from credentials import get_secret
 import forms
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
 TOKEN = get_secret('TOKEN')
 app.config['SECRET_KEY'] = TOKEN
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite::///site.db'
+
+database = SQLAlchemy(app)
 
 lista_usuarios = ['Jonas', 'Amanda', 'Helena', 'Pipoca', 'Pantera']
 
