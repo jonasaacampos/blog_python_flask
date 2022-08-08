@@ -14,6 +14,7 @@ class FormCriarConta(FlaskForm):
     senha_confimacao = PasswordField('digite novamamente sua senha:', validators=[EqualTo('senha')])
     btn_submit_criar_conta = SubmitField('Criar Conta')
 
+## ! SEMPRE usar iniciar função de validação com 'validate_'
     def validate_email(self, email):
         user_mail = Usuario.query.filter_by(email=email.data).first()
         if user_mail:

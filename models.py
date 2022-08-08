@@ -1,5 +1,9 @@
-from app import database
+from app import database, login_manager
 from datetime import datetime
+from flask_login import UserMixin
+@login_manager.user_loader
+def load_user(id_user):
+    return Usuario.query.get(int(id_user))
 
 
 """
@@ -17,7 +21,8 @@ database.create_all()
 
 """
 
-class Usuario(database.Model):
+
+class Usuario(database.Model, UserMixin):
     id = database.Column(database.Integer, primary_key=True)
     username = database.Column(database.String, nullable=False)
     email = database.Column(database.String, nullable=False, unique=True)
