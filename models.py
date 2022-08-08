@@ -2,6 +2,18 @@ from app import database
 from datetime import datetime
 
 
+"""
+Para testar o banco de dados:
+- from app import database
+- database.create_all()
+fazer alguma insersao de novo usuario
+- from models import Usuario
+- Usuario.query.all()
+uario = Usuario.query.first()
+usuario.username
+...
+"""
+
 class Usuario(database.Model):
     id = database.Column(database.Integer, primary_key=True)
     username = database.Column(database.String, nullable=False)
