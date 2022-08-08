@@ -1,8 +1,11 @@
 from flask import render_template, url_for, request, flash, redirect
 import forms
 from app import app
+from models import Usuario
 
 lista_usuarios = ['Jonas', 'Amanda', 'Helena', 'Pipoca', 'Pantera']
+
+
 @app.route('/')
 def home():  # put application's code here
     return render_template('home.html')
@@ -28,6 +31,8 @@ def login():
         return redirect(url_for('home'))
 
     if form_criar_conta.validate_on_submit() and 'btn_submit_criar_conta' in request.form:
+        user, mail, pwd = form_criar_conta.username.data, form_criar_conta.email.data, form_criar_conta.senha.data
+        usuario = Usuario(username= user,email=mail , senha=pwd)
         flash(f'Conta criada com sucesso para {form_criar_conta.email.data}', 'alert-success')
         return redirect(url_for('home'))
 
