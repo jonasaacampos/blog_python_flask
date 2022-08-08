@@ -2,7 +2,7 @@ from flask import render_template, url_for, request, flash, redirect
 import forms
 from app import app, database, bcrypt
 from models import Usuario
-from flask_login import login_user, logout_user, current_user
+from flask_login import login_user, logout_user, current_user, login_required
 
 lista_usuarios = [ 'Jonas', 'Amanda', 'Helena', 'Pipoca', 'Pantera' ]
 
@@ -18,6 +18,7 @@ def contato():
 
 
 @app.route('/users')
+@login_required
 def usuarios():
     return render_template('users.html', lista_usuarios=lista_usuarios)
 
@@ -49,6 +50,7 @@ def login():
 
 
 @app.route('/sair')
+@login_required
 def sair():
     logout_user()
     flash('Logout realizado com sucesso!', 'alert-success')
@@ -56,11 +58,13 @@ def sair():
 
 
 @app.route('/perfil')
+@login_required
 def perfil():
     return render_template('perfil.html')
 
 
 @app.route('/post/new')
+@login_required
 def post_new():
     return render_template('post-new.html')
 
