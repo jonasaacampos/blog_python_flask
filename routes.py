@@ -1,6 +1,6 @@
 from flask import render_template, url_for, request, flash, redirect
 import forms
-from app import app, database
+from app import app, database, bcrypt
 from models import Usuario
 
 lista_usuarios = ['Jonas', 'Amanda', 'Helena', 'Pipoca', 'Pantera']
@@ -31,7 +31,8 @@ def login():
         return redirect(url_for('home'))
 
     if form_criar_conta.validate_on_submit() and 'btn_submit_criar_conta' in request.form:
-        user, mail, pwd = form_criar_conta.username.data, form_criar_conta.email.data, form_criar_conta.senha.data
+        cripto_hash = bcrypt.generate_password_hash(form_criar_conta.senha.data)
+        user, mail, pwd = form_criar_conta.username.data, form_criar_conta.email.data, cripto_hash
         usuario = Usuario(username= user,email=mail , senha=pwd)
         database.session.add(usuario)
         database.session.commit()

@@ -4,14 +4,17 @@ from datetime import datetime
 
 """
 Para testar o banco de dados:
-- from app import database
-- database.create_all()
+- from app import database || database.create_all()
 fazer alguma insersao de novo usuario
-- from models import Usuario
-- Usuario.query.all()
-uario = Usuario.query.first()
-usuario.username
+- from models import Usuario || Usuario.query.all() || uario = Usuario.query.first() || usuario.username
 ...
+user2 = Usuario.query.filter_by(username='teste2').first()
+Usuario[1].senha
+
+## limpar base de dados de teste
+database.drop_all()
+database.create_all()
+
 """
 
 class Usuario(database.Model):
