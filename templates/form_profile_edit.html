@@ -1,7 +1,6 @@
 <form action="" method="post" enctype="multipart/form-data" class="border p-4 mt-2">
     {{ form.csrf_token }}
     <legend>Editar Dados</legend>
-    <>
 
     <div class="form-group">
         {{ form.username.label (class='form-control-label') }}
@@ -49,7 +48,6 @@
                 {{ campo.label }}
             </div>
         {% endif %}
-
     {% endfor %}
 
     </fieldset>

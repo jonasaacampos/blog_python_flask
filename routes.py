@@ -10,6 +10,26 @@ from PIL import Image
 lista_usuarios = ['Jonas', 'Amanda', 'Helena', 'Pipoca', 'Pantera']
 
 
+def salvar_imagem(imagem):
+    cod_unique = secrets.token_hex(6)
+    arquivo_nome, arquivo_extensao = os.path.splitext(imagem.filename)
+    novo_arquivo = arquivo_nome + cod_unique + arquivo_extensao
+    caminho_arquivo = os.path.join(app.root_path, 'static/img_profiles', novo_arquivo)
+    tamanho_img = (200, 200)
+    imagem_reduzida = Image.open(imagem)
+    imagem_reduzida.thumbnail(tamanho_img)
+    imagem_reduzida.save(caminho_arquivo)
+    return novo_arquivo
+
+
+def atualizar_skills(form):
+    lista_skills = []
+    for campo in form:
+        if 'check_skill' in campo.name:
+            if campo.data:
+                lista_skills.append(campo.label.text)
+    return ';'.join(lista_skills)
+
 @app.route('/')
 def home():  # put application's code here
     return render_template('home.html')
@@ -71,18 +91,6 @@ def perfil():
     return render_template('perfil.html', profile_image=profile_image)
 
 
-def salvar_imagem(imagem):
-    cod_unique = secrets.token_hex(6)
-    arquivo_nome, arquivo_extensao = os.path.splitext(imagem.filename)
-    novo_arquivo = arquivo_nome + cod_unique + arquivo_extensao
-    caminho_arquivo = os.path.join(app.root_path, 'static/img_profiles', novo_arquivo)
-    tamanho_img = (200, 200)
-    imagem_reduzida = Image.open(imagem)
-    imagem_reduzida.thumbnail(tamanho_img)
-    imagem_reduzida.save(caminho_arquivo)
-    return novo_arquivo
-
-
 @app.route('/perfil/editar', methods=['GET', 'POST'])
 @login_required
 def perfil_editar():
@@ -95,6 +103,8 @@ def perfil_editar():
         if form.foto_perfil.data:
             nova_imagem = salvar_imagem(form.foto_perfil.data)
             current_user.user_photo = nova_imagem
+
+        current_user.skills = atualizar_skills(form)
 
         database.session.commit()
         flash('Perfil atualizado com sucesso!', 'alert-success')
