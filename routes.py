@@ -3,8 +3,11 @@ import forms
 from app import app, database, bcrypt
 from models import Usuario
 from flask_login import login_user, logout_user, current_user, login_required
+import secrets
+import os
+from PIL import Image
 
-lista_usuarios = [ 'Jonas', 'Amanda', 'Helena', 'Pipoca', 'Pantera' ]
+lista_usuarios = ['Jonas', 'Amanda', 'Helena', 'Pipoca', 'Pantera']
 
 
 @app.route('/')
@@ -23,7 +26,7 @@ def usuarios():
     return render_template('users.html', lista_usuarios=lista_usuarios)
 
 
-@app.route('/login', methods=[ 'GET', 'POST' ])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     form_login = forms.FormLogin()
     form_criar_conta = forms.FormCriarConta()
@@ -68,7 +71,19 @@ def perfil():
     return render_template('perfil.html', profile_image=profile_image)
 
 
-@app.route('/perfil/editar', methods=[ 'GET', 'POST' ])
+def salvar_imagem(imagem):
+    cod_unique = secrets.token_hex(6)
+    arquivo_nome, arquivo_extensao = os.path.splitext(imagem.filename)
+    novo_arquivo = arquivo_nome + cod_unique + arquivo_extensao
+    caminho_arquivo = os.path.join(app.root_path, 'static/img_profiles', novo_arquivo)
+    tamanho_img = (200, 200)
+    imagem_reduzida = Image.open(imagem)
+    imagem_reduzida.thumbnail(tamanho_img)
+    imagem_reduzida.save(caminho_arquivo)
+    return novo_arquivo
+
+
+@app.route('/perfil/editar', methods=['GET', 'POST'])
 @login_required
 def perfil_editar():
     form = forms.FormEditarPerfil()
@@ -76,6 +91,11 @@ def perfil_editar():
     if form.validate_on_submit():
         current_user.username = form.username.data
         current_user.email = form.email.data
+
+        if form.foto_perfil.data:
+            nova_imagem = salvar_imagem(form.foto_perfil.data)
+            current_user.user_photo = nova_imagem
+
         database.session.commit()
         flash('Perfil atualizado com sucesso!', 'alert-success')
         return redirect(url_for('perfil'))

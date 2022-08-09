@@ -32,14 +32,13 @@
         </div>
         <div class="form-group">
             {{ form.foto_perfil.label }}<br/>
-            {{ form.foto_perfil (class= 'form-control-file') }}
+            {{ form.foto_perfil (class='form-control-file') }}
             {% if form.foto_perfil.errors %}
                 {% for error in form.foto_perfil.errors %}
                     <span class="text-danger">{{ error }}</span><br/>
                 {% endfor %}
             {% endif %}  }
         </div>
-
 
     </fieldset>
     {{ form.btn_submit_profile_edit (class='btn btn-primary mt-2') }}
