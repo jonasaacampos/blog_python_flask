@@ -1,44 +1,56 @@
 <form action="" method="post" enctype="multipart/form-data" class="border p-4 mt-2">
     {{ form.csrf_token }}
     <legend>Editar Dados</legend>
-    <fieldset>
+    <>
 
-        <div class="form-group">
-            {{ form.username.label (class='form-control-label') }}
-            {% if form.username.errors %}
-                {{ form.username (class='form-control is-invalid') }}
-                <div class="invalid-feedback">
-                    {% for erro in form.username.errors %}
-                        {{ erro }}
-                    {% endfor %}
-                </div>
-            {% else %}
-                {{ form.username (class='form-control') }}
-            {% endif %}
-        </div>
-
-        <div class="form-group">
-            {{ form.email.label (class='form-control-label') }}
-            {% if form.email.errors %}
-                {{ form.email (class='form-control is-invalid') }}
-                <div class="invalid-feedback">
-                    {% for erro in form.email.errors %}
-                        {{ erro }}
-                    {% endfor %}
-                </div>
-            {% else %}
-                {{ form.email (class='form-control') }}
-            {% endif %}
-        </div>
-        <div class="form-group">
-            {{ form.foto_perfil.label }}<br/>
-            {{ form.foto_perfil (class='form-control-file') }}
-            {% if form.foto_perfil.errors %}
-                {% for error in form.foto_perfil.errors %}
-                    <span class="text-danger">{{ error }}</span><br/>
+    <div class="form-group">
+        {{ form.username.label (class='form-control-label') }}
+        {% if form.username.errors %}
+            {{ form.username (class='form-control is-invalid') }}
+            <div class="invalid-feedback">
+                {% for erro in form.username.errors %}
+                    {{ erro }}
                 {% endfor %}
-            {% endif %}  }
-        </div>
+            </div>
+        {% else %}
+            {{ form.username (class='form-control') }}
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+        {{ form.email.label (class='form-control-label') }}
+        {% if form.email.errors %}
+            {{ form.email (class='form-control is-invalid') }}
+            <div class="invalid-feedback">
+                {% for erro in form.email.errors %}
+                    {{ erro }}
+                {% endfor %}
+            </div>
+        {% else %}
+            {{ form.email (class='form-control') }}
+        {% endif %}
+    </div>
+    <div class="form-group">
+        {{ form.foto_perfil.label }}<br/>
+        {{ form.foto_perfil (class='form-control-file') }}
+        {% if form.foto_perfil.errors %}
+            {% for error in form.foto_perfil.errors %}
+                <span class="text-danger">{{ error }}</span><br/>
+            {% endfor %}
+        {% endif %}  }
+    </div>
+    <hr/>
+    <h2>Tech Skills</h2>
+
+    {% for campo in form %}
+        {% if 'check_skill' in campo.name %}
+            <div class="form-group">
+                {{ campo (class='form-chek-input') }}
+                {{ campo.label }}
+            </div>
+        {% endif %}
+
+    {% endfor %}
 
     </fieldset>
     {{ form.btn_submit_profile_edit (class='btn btn-primary mt-2') }}
