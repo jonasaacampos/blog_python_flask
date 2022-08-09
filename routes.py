@@ -64,7 +64,8 @@ def sair():
 @app.route('/perfil')
 @login_required
 def perfil():
-    return render_template('perfil.html')
+    profile_image = url_for('static', filename=f'img_profiles/{current_user.user_photo}')
+    return render_template('perfil.html', profile_image=profile_image)
 
 
 @app.route('/post/new')
@@ -72,3 +73,6 @@ def perfil():
 def post_new():
     return render_template('post-new.html')
 
+
+## img credit
+# flaticon
