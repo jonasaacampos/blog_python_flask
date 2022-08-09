@@ -68,11 +68,18 @@ def perfil():
     return render_template('perfil.html', profile_image=profile_image)
 
 
+@app.route('/perfil/editar', methods=[ 'GET', 'POST' ])
+@login_required
+def perfil_editar():
+    form = forms.FormEditarPerfil()
+    profile_image = url_for('static', filename=f'img_profiles/{current_user.user_photo}')
+    return render_template('perfil_editar.html', profile_image=profile_image, form=form)
+
+
 @app.route('/post/new')
 @login_required
 def post_new():
     return render_template('post-new.html')
-
 
 ## img credit
 # flaticon
