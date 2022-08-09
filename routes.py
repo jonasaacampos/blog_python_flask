@@ -79,7 +79,8 @@ def perfil_editar():
         database.session.commit()
         flash('Perfil atualizado com sucesso!', 'alert-success')
         return redirect(url_for('perfil'))
-    elif request.method == 'GET':
+
+    if request.method == 'GET':
         form.username.data = current_user.username
         form.email.data = current_user.email
 
