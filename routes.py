@@ -7,8 +7,6 @@ import secrets
 import os
 from PIL import Image
 
-lista_usuarios = ['Jonas', 'Amanda', 'Helena', 'Pipoca', 'Pantera']
-
 
 def salvar_imagem(imagem):
     cod_unique = secrets.token_hex(6)
@@ -30,6 +28,7 @@ def atualizar_skills(form):
                 lista_skills.append(campo.label.text)
     return ';'.join(lista_skills)
 
+
 @app.route('/')
 def home():  # put application's code here
     return render_template('home.html')
@@ -43,6 +42,7 @@ def contato():
 @app.route('/users')
 @login_required
 def usuarios():
+    lista_usuarios = Usuario.query.all()
     return render_template('users.html', lista_usuarios=lista_usuarios)
 
 

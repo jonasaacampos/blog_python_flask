@@ -2,17 +2,64 @@
 
 {% block body %}
 
-    <div class="container">
-        <h1>Usuários</h1>
-        {{ lista_usuarios }}
+    <div class="container text-center">
+        <div class="row">
+            <div class="col">
 
-        <ol>
-            {% for usuario in lista_usuarios %}
-                <li> {{ usuario }} </li>
-            {% endfor %}
-        </ol>
+                {% for usuario in lista_usuarios %}
 
+                    <div class="container mt-5 d-flex justify-content-center">
+                        <div class="row align-items-start">
+                            <div class="col">
+                                <div class="card p-3">
+                                    <div class="d-flex align-items-center">
+                                        <div class="image pe-2 mt-2 me-2">
+                                            <img src='{{ url_for('static', filename='img_profiles/{}'.format(usuario.user_photo)) }}'
+                                                 class="rounded" width="130">
+                                        </div>
+                                        <div class="ml-3 w-100">
+                                            <h4 class="mb-0 mt-0">{{ usuario.username }}</h4>
+                                            <span>{{ usuario.email }}</span>
+                                            <div class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">
+                                                <div class="d-flex flex-column">
+
+                                                    <span class="articles">Skills</span>
+                                                    {% if usuario.skills in '0' %}
+                                                        <span class="number1">0</span>
+                                                    {% else %}
+                                                        <span class="number1">{{ usuario.skills.count(';') + 1 }}</span>
+                                                    {% endif %}
+
+                                                </div>
+
+                                                <div class="d-flex flex-column">
+                                                    <span class="rating">Posts</span>
+                                                    <span class="number3">0</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col" style="text-align: center">
+                                <h4>Skills</h4>
+                                {% if usuario.skills not in '0' %}
+                                    {% for skill in usuario.skills.split(';') %}
+                                        <button type="button" class="btn btn-success mt-1" disabled>{{ skill }}</button>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                {% endfor %}
+
+            </div>
+        </div>
     </div>
+
+
 
 
 {% endblock %}
