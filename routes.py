@@ -1,7 +1,7 @@
 from flask import render_template, url_for, request, flash, redirect
 import forms
 from app import app, database, bcrypt
-from models import Usuario
+from models import Usuario, Post
 from flask_login import login_user, logout_user, current_user, login_required
 import secrets
 import os
@@ -121,7 +121,14 @@ def perfil_editar():
 @app.route('/post/new')
 @login_required
 def post_new():
-    return render_template('post-new.html')
+    form_new_post = forms.FormCriarPost()
+    if form_new_post.validate_on_submit():
+        post = Post(post_title=form_new_post.post_title.data, post_text=form_new_post.post_text.data, author=current_user)
+        database.session.add(post)
+        database.session.commit()
+        flash('Postaagem criada com sucesso!', 'alert-success')
+        return redirect(url_for('home'))
+    return render_template('post-new.html', form_new_post=form_new_post)
 
 ## img credit
 # flaticon

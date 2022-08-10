@@ -1,0 +1,36 @@
+<form action="" method="post" class="border p-4 mt-2">
+    {{ form_new_post.csrf_token }}
+    <legend>Novo Post</legend>
+    <fieldset>
+        <div class="form-group">
+            {{ form_new_post.post_title.label (class='form-control-label') }}
+            {% if form_new_post.post_title.errors %}
+                {{ form_new_post.post_title (class='form-control is-invalid') }}
+                <div class="invalid-feedback">
+                    {% for erro in form_new_post.post_title.errors %}
+                        {{ erro }}
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form_new_post.post_title (class='form-control') }}
+            {% endif %}
+        </div>
+
+    <div class="form-group">
+            {{ form_new_post.post_text.label (class='form-control-label') }}
+            {% if form_new_post.post_text.errors %}
+                {{ form_new_post.post_text (class='form-control is-invalid') }}
+                <div class="invalid-feedback">
+                    {% for erro in form_new_post.post_text.errors %}
+                        {{ erro }}
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form_new_post.post_text (class='form-control') }}
+            {% endif %}
+        </div>
+
+
+    </fieldset>
+    {{ form_new_post. btn_submit_new_post (class='btn btn-primary mt-2') }}
+</form>
