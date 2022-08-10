@@ -9,8 +9,14 @@
                 <span>{{ current_user.email }}</span>
                 <div class="p-2 mt-2 bg-primary d-flex justify-content-between rounded text-white stats">
                     <div class="d-flex flex-column">
+
                         <span class="articles">Skills</span>
-                        <span class="number1">0</span>
+                        {% if current_user.skills in '0' %}
+                            <span class="number1">0</span>
+                        {% else %}
+                            <span class="number1">{{ current_user.skills.count(';') + 1 }}</span>
+                        {% endif %}
+
                     </div>
 
                     <div class="d-flex flex-column">
@@ -19,7 +25,8 @@
                     </div>
                 </div>
                 <div class="button mt-2 d-flex flex-row align-items-center">
-                    <a href="{{ url_for('perfil_editar') }}"><button class="btn btn-sm btn-outline-primary w-100">Editar Perfil</button>
+                    <a href="{{ url_for('perfil_editar') }}">
+                        <button class="btn btn-sm btn-outline-primary w-100">Editar Perfil</button>
                     </a>
                 </div>
             </div>

@@ -1,6 +1,8 @@
 from app import database, login_manager
 from datetime import datetime
 from flask_login import UserMixin
+
+
 @login_manager.user_loader
 def load_user(id_user):
     return Usuario.query.get(int(id_user))
@@ -29,7 +31,7 @@ class Usuario(database.Model, UserMixin):
     senha = database.Column(database.String, nullable=False)
     user_photo = database.Column(database.String, default='default_profile_img.png')
     posts = database.relationship('Post', backref='post_author', lazy=True)
-    skills = database.Column(database.String, nullable=False, default='Não informado')
+    skills = database.Column(database.String, nullable=False, default=0)
 
 
 class Post(database.Model):
