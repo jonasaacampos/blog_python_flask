@@ -30,8 +30,10 @@ def atualizar_skills(form):
 
 
 @app.route('/')
-def home():  # put application's code here
-    return render_template('home.html')
+def home():
+    posts = Post.query.all()
+
+    return render_template('home.html', posts=posts)
 
 
 @app.route('/contato')
@@ -118,15 +120,16 @@ def perfil_editar():
     return render_template('perfil_editar.html', profile_image=profile_image, form=form)
 
 
-@app.route('/post/new')
+@app.route('/post/new', methods=['GET', 'POST'])
 @login_required
 def post_new():
     form_new_post = forms.FormCriarPost()
     if form_new_post.validate_on_submit():
-        post = Post(post_title=form_new_post.post_title.data, post_text=form_new_post.post_text.data, author=current_user)
+        post = Post(post_title=form_new_post.post_title.data, post_text=form_new_post.post_text.data,
+                    id_author=current_user.id)
         database.session.add(post)
         database.session.commit()
-        flash('Postaagem criada com sucesso!', 'alert-success')
+        flash('Postagem criada com sucesso!', 'alert-success')
         return redirect(url_for('home'))
     return render_template('post-new.html', form_new_post=form_new_post)
 
