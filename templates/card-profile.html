@@ -33,3 +33,17 @@
         </div>
     </div>
 </div>
+<div class="row justify-content-center">
+
+    <div class="col col-4" style="text-align: center">
+        <hr/>
+        <h4>Skills</h4>
+        {% if current_user.skills not in '0' %}
+            {% for skill in current_user.skills.split(';') %}
+                <button type="button" class="btn btn-success mt-1" disabled>{{ skill }}</button>
+            {% endfor %}
+        {% endif %}
+
+
+    </div>
+</div>
