@@ -31,7 +31,7 @@ def atualizar_skills(form):
 
 @app.route('/')
 def home():
-    posts = Post.query.all()
+    posts = Post.query.order_by(Post.id.desc())
 
     return render_template('home.html', posts=posts)
 
@@ -126,7 +126,7 @@ def post_new():
     form_new_post = forms.FormCriarPost()
     if form_new_post.validate_on_submit():
         post = Post(post_title=form_new_post.post_title.data, post_text=form_new_post.post_text.data,
-                    id_author=current_user.id)
+                    author=current_user)
         database.session.add(post)
         database.session.commit()
         flash('Postagem criada com sucesso!', 'alert-success')

@@ -30,7 +30,7 @@ class Usuario(database.Model, UserMixin):
     email = database.Column(database.String, nullable=False, unique=True)
     senha = database.Column(database.String, nullable=False)
     user_photo = database.Column(database.String, default='default_profile_img.png')
-    posts = database.relationship('Post', backref='post_author', lazy=True)
+    posts = database.relationship('Post', backref='author', lazy=True)
     skills = database.Column(database.String, nullable=False, default=0)
 
 
