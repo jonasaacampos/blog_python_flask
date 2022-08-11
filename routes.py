@@ -133,5 +133,11 @@ def post_new():
         return redirect(url_for('home'))
     return render_template('post-new.html', form_new_post=form_new_post)
 
+
+@app.route('/post/<post_id>')
+def post_show(post_id):
+    post = Post.query.get(post_id)
+    return render_template('post.html', post=post)
+
 ## img credit
 # flaticon

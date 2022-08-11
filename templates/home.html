@@ -17,17 +17,18 @@
 
                     <p>Escrito por: <strong>{{ post.author.username }}</strong></p>
 
-                            {% if current_user.skills not in '0' %}
-                                {% for skill in current_user.skills.split(';') %}
-                                    {% print('*' + skill) %}
-                                {% endfor %}
-                            {% endif %}
+                    {% if current_user.skills not in '0' %}
+                        {% for skill in current_user.skills.split(';') %}
+                            {% print('*' + skill) %}
+                        {% endfor %}
+                    {% endif %}
 
 
                 </div>
 
                 <div class="column col-9">
-                    <h3>{{ post.post_title }}</h3>
+                    <a style="text-decoration: none" href="{{ url_for('post_show', post_id=post.id) }}">
+                        <h3>{{ post.post_title }}</h3></a>
                     <p>{{ post.post_text }}</p>
                 </div>
             </div>

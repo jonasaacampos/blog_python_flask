@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+    <div class="container">
+
+        <div class="row border rounded mt-3 p-3 my-post">
+            <div class="column col-3">
+                <div class="image pb-2">
+                    <img src='{{ url_for('static', filename='img_profiles/{}'.format(post.author.user_photo)) }}'
+                         class="rounded" width="130">
+                </div>
+
+                <p>Escrito por: <strong>{{ post.author.username }}</strong></p>
+
+                {% if current_user.skills not in '0' %}
+                    {% for skill in current_user.skills.split(';') %}
+                        {% print('*' + skill) %}
+                    {% endfor %}
+                {% endif %}
+
+
+            </div>
+
+            <div class="column col-9">
+                <h3>{{ post.post_title }}</h3>
+                <p>{{ post.post_text }}</p>
+            </div>
+        </div>
+
+
+    </div>
+
+{% endblock %}
