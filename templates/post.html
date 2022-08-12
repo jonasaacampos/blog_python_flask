@@ -23,15 +23,27 @@
             </div>
 
             <div class="column col-9">
-                <h3>{{ post.post_title }}</h3>
+                <h3>
+                    {{ post.post_title }}
+
+                    <small class="text-muted" style="font-size: 14px">
+                        {% if form_new_post %}
+                            - <a href="#editar_post">Editar</a>  / Excluir
+                        {% endif %}
+                    </small>
+
+
+                </h3>
+                <small> - Data de Criação: {{ post.post_created_at.strftime('%d/%m/%Y às %H:%M:%S') }}</small>
+                <br/>
                 <p>{{ post.post_text }}</p>
             </div>
         </div>
 
     </div>
 
-        {% if post %}
-          {% include 'form_new_post.html' %}
+    {% if post %}
+        {% include 'form_new_post.html' %}
     {% endif %}
 
 {% endblock %}

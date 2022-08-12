@@ -1,6 +1,6 @@
-<form action="" method="post" class="border p-4 mt-2">
+<form action="" method="post" class="border p-4 mt-2" id="editar_post">
     {{ form_new_post.csrf_token }}
-    <legend>Novo Post</legend>
+    <legend>Criar/Editar Post</legend>
     <fieldset>
         <div class="form-group">
             {{ form_new_post.post_title.label (class='form-control-label') }}
