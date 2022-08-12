@@ -33,6 +33,9 @@ class Usuario(database.Model, UserMixin):
     posts = database.relationship('Post', backref='author', lazy=True)
     skills = database.Column(database.String, nullable=False, default=0)
 
+    def contar_posts(self):
+        return len(self.posts)
+
 
 class Post(database.Model):
     # ForeinKey # mesmo o nome da classe sendo maiúscula, o valor a ForeinKey
