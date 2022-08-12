@@ -1,4 +1,4 @@
-from flask import render_template, url_for, request, flash, redirect
+from flask import render_template, url_for, request, flash, redirect, abort
 import forms
 from app import app, database, bcrypt
 from models import Usuario, Post
@@ -157,5 +157,14 @@ def post_show(post_id):
         form = None
     return render_template('post.html', post=post, form_new_post=form_new_post)
 
-## img credit
-# flaticon
+@app.route('/post/<post_id>/excluir', methods=['GET', 'POST'])
+@login_required
+def excluir_post(post_id):
+    post = Post.query.get(post_id)
+    if current_user == post.author:
+        database.session.delete(post)
+        database.session.commit()
+        flash('Post Excluído com Sucesso', 'alert-danger')
+        return redirect(url_for('home'))
+    else:
+        abort(403)

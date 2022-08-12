@@ -28,7 +28,9 @@
 
                     <small class="text-muted" style="font-size: 14px">
                         {% if form_new_post %}
-                            - <a href="#editar_post">Editar</a>  / <a href="modal_excluir.html" data-bs-toggle="modal" data-bs-target="#Exluir">Excluir</a>
+                            - <a href="#editar_post">Editar</a>  /
+                            <a href="modal_excluir.html" class="text-danger" data-bs-toggle="modal"
+                               data-bs-target="#Excluir">Excluir</a>
                         {% endif %}
                     </small>
 
@@ -45,6 +47,7 @@
     {% if post %}
         {% include 'form_new_post.html' %}
     {% endif %}
+
 
     {% include 'modal_excluir.html' %}
 
