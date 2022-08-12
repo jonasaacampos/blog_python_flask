@@ -28,7 +28,10 @@
             </div>
         </div>
 
-
     </div>
+
+        {% if post %}
+          {% include 'form_new_post.html' %}
+    {% endif %}
 
 {% endblock %}

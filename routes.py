@@ -134,10 +134,28 @@ def post_new():
     return render_template('post-new.html', form_new_post=form_new_post)
 
 
-@app.route('/post/<post_id>')
+@app.route('/post/<post_id>', methods=['GET', 'POST'])
+@login_required
 def post_show(post_id):
     post = Post.query.get(post_id)
-    return render_template('post.html', post=post)
+
+
+    if current_user == post.author:
+        form_new_post = forms.FormCriarPost()
+        if request.method == 'GET':
+            form_new_post.post_title.data = post.post_title
+            form_new_post.post_text.data = post.post_text
+
+        if form_new_post.validate_on_submit():
+            post.post_title = form_new_post.post_title.data
+            post.post_text = form_new_post.post_text.data
+            database.session.commit()
+            flash('Edição realizada com sucesso!', 'alert-success')
+
+
+    else:
+        form = None
+    return render_template('post.html', post=post, form_new_post=form_new_post)
 
 ## img credit
 # flaticon
